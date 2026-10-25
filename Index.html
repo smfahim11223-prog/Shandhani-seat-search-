@@ -1,0 +1,336 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>সিট অনুসন্ধান | সন্ধানী স্কুল এন্ড কলেজ</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, "Noto Sans Bengali", sans-serif;
+    background: #f2f6fc;
+    color: #183456;
+}
+
+/* Header */
+.header {
+    background: linear-gradient(120deg, #102b50, #175ba5);
+    color: white;
+    text-align: center;
+    padding: 30px 15px 25px;
+    border-bottom: 5px solid #e8bd53;
+}
+
+.logo {
+    width: 76px;
+    height: 76px;
+    margin: 0 auto 12px;
+    border: 3px solid #e8bd53;
+    border-radius: 50%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 3px 10px #081b35;
+}
+
+.logo svg {
+    width: 48px;
+    height: 48px;
+}
+
+.header h1 {
+    font-size: 25px;
+    margin: 8px 0;
+    font-weight: 700;
+}
+
+.header p {
+    margin: 8px 0 0;
+    color: #ffdf83;
+    font-size: 19px;
+    font-weight: bold;
+}
+
+/* Main content */
+main {
+    flex: 1;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 30px 16px;
+}
+
+.card {
+    background: white;
+    border: 1px solid #e0e8f3;
+    border-radius: 15px;
+    padding: 28px 23px;
+    box-shadow: 0 6px 22px rgba(20, 56, 100, 0.10);
+}
+
+.search-icon {
+    width: 68px;
+    height: 68px;
+    margin: 0 auto 15px;
+    border-radius: 50%;
+    background: #eaf2ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-icon svg {
+    width: 34px;
+    height: 34px;
+    stroke: #175ba5;
+}
+
+.card h2 {
+    text-align: center;
+    font-size: 23px;
+    margin: 8px 0 10px;
+    color: #163f78;
+}
+
+.description {
+    text-align: center;
+    color: #738197;
+    font-size: 14px;
+    line-height: 1.9;
+    margin: 0 0 26px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+input {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #b8cde8;
+    border-radius: 8px;
+    font-size: 17px;
+    outline: none;
+    background: #fff;
+    color: #183456;
+}
+
+input:focus {
+    border-color: #1768c4;
+    box-shadow: 0 0 0 3px #e4efff;
+}
+
+button {
+    width: 100%;
+    margin-top: 17px;
+    padding: 15px;
+    border: 0;
+    border-radius: 8px;
+    background: #1764b5;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:active {
+    background: #10477f;
+}
+
+#result {
+    display: none;
+    margin-top: 22px;
+    padding: 18px 12px;
+    text-align: center;
+    line-height: 2;
+    border: 1px solid #b8dfc8;
+    background: #effaf3;
+    border-radius: 9px;
+    color: #175b39;
+}
+
+.room-number {
+    display: block;
+    font-size: 35px;
+    font-weight: bold;
+    line-height: 1.5;
+    color: #147344;
+}
+
+#result.error {
+    color: #a52332;
+    background: #fff1f1;
+    border-color: #f0c4c4;
+}
+
+.notice {
+    text-align: center;
+    color: #7b8798;
+    font-size: 12px;
+    line-height: 1.8;
+    margin: 22px 0 0;
+}
+
+/* Footer */
+.footer {
+    background: #102b50;
+    color: #dce8f7;
+    padding: 16px 20px;
+    text-align: right;
+    font-size: 13px;
+}
+
+.footer strong {
+    color: #83c8ff;
+}
+
+@media (max-width: 380px) {
+    .header h1 { font-size: 22px; }
+    .header p { font-size: 17px; }
+    .card { padding: 24px 17px; }
+    .card h2 { font-size: 21px; }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+    <div class="logo">
+        <svg viewBox="0 0 64 64" fill="none"
+             xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 24L32 12L56 24L32 36L8 24Z"
+                  fill="#175BA5" stroke="#175BA5"
+                  stroke-width="2" stroke-linejoin="round"/>
+            <path d="M17 30V43C25 50 39 50 47 43V30"
+                  stroke="#175BA5" stroke-width="3"
+                  stroke-linecap="round"/>
+            <path d="M55 25V40" stroke="#D4A72C"
+                  stroke-width="3" stroke-linecap="round"/>
+            <circle cx="55" cy="44" r="3" fill="#D4A72C"/>
+            <path d="M25 28V37H39V28"
+                  stroke="#D4A72C" stroke-width="2"/>
+        </svg>
+    </div>
+
+    <h1>সন্ধানী স্কুল এন্ড কলেজ</h1>
+    <p>নির্বাচনি পরীক্ষা ২০২৭</p>
+</header>
+
+<main>
+    <section class="card">
+
+        <div class="search-icon">
+            <svg viewBox="0 0 24 24" fill="none"
+                 stroke-width="2.2" stroke-linecap="round">
+                <circle cx="10.8" cy="10.8" r="6.8"/>
+                <path d="m16 16 5 5"/>
+            </svg>
+        </div>
+
+        <h2>পরীক্ষার সিট অনুসন্ধান</h2>
+
+        <p class="description">
+            আপনার রোল নম্বর লিখুন এবং<br>
+            পরীক্ষার কক্ষের তথ্য জেনে নিন।
+        </p>
+
+        <form id="seatForm">
+            <label for="roll">পরীক্ষার্থীর রোল নম্বর</label>
+
+            <input
+                type="text"
+                id="roll"
+                inputmode="numeric"
+                placeholder="রোল নম্বর লিখুন"
+                autocomplete="off"
+                required
+            >
+
+            <button type="submit">⌕ &nbsp; সিট খুঁজুন</button>
+        </form>
+
+        <div id="result" aria-live="polite"></div>
+
+        <p class="notice">
+            অনুগ্রহ করে আপনার সঠিক রোল নম্বর লিখুন।<br>
+            প্রয়োজনে কলেজ কর্তৃপক্ষের সঙ্গে যোগাযোগ করুন।
+        </p>
+
+    </section>
+</main>
+
+<footer class="footer">
+    Powered by <strong>smfahim</strong>
+</footer>
+
+<script>
+const form = document.getElementById("seatForm");
+const rollInput = document.getElementById("roll");
+const result = document.getElementById("result");
+
+function toEnglishDigits(value) {
+    return value
+        .replace(/[০-৯]/g, d =>
+            "০১২৩৪৫৬৭৮৯".indexOf(d))
+        .trim();
+}
+
+function toBanglaDigits(value) {
+    return String(value).replace(/[0-9]/g, d =>
+        "০১২৩৪৫৬৭৮৯"[Number(d)]);
+}
+
+form.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const text = toEnglishDigits(rollInput.value);
+    const roll = Number(text);
+
+    result.style.display = "block";
+    result.className = "";
+
+    if (!/^\d+$/.test(text) ||
+        !Number.isInteger(roll) ||
+        roll < 1 || roll > 100) {
+
+        result.className = "error";
+        result.textContent =
+            "সঠিক রোল নম্বর লিখুন (০১ থেকে ১০০)।";
+        return;
+    }
+
+    let room;
+
+    if (roll <= 42) {
+        room = 101;
+    } else if (roll <= 51) {
+        room = 102;
+    } else {
+        room = 103;
+    }
+
+    result.innerHTML =
+        "<strong>আপনার রুম নম্বর</strong>" +
+        '<span class="room-number">' +
+        toBanglaDigits(room) +
+        "</span>" +
+        "রোল নম্বর: " + toBanglaDigits(roll);
+});
+</script>
+
+</body>
+</html>
